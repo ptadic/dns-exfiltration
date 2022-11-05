@@ -127,7 +127,6 @@ class ExfiltrationClassifier(object):
                 n_estimators = 100,
                 objective='binary:logistic',
                 tree_method='hist',
-                sampling_method='gradient_based',
                 verbosity=1 if verbose else 0,
                 subsample=0.1,
                 scale_pos_weight=1,
