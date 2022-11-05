@@ -1,6 +1,6 @@
 import numpy as np
 from pathlib import Path
-from typing import Union
+from typing import Union, Dict, Tuple
 from exfiltration_dataset import ExfiltrationDataset
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.svm import SVC
@@ -22,7 +22,7 @@ class ExfiltrationClassifier(object):
     def __init__(
         self, 
         classifier_type: str, 
-        datasets: dict[str, ExfiltrationDataset], 
+        datasets: Dict[str, ExfiltrationDataset], 
         verbose: bool = False
     ):
         """Classifier that trains and evaluates on ExfiltrationDataset objects.
@@ -151,7 +151,7 @@ class ExfiltrationClassifier(object):
         split: str = 'test', 
         exfiltration_type: str = 'both', 
         return_errors: bool = False
-    ) -> Union[dict, tuple[dict, np.ndarray, np.ndarray]]:
+    ) -> Union[dict, Tuple[dict, np.ndarray, np.ndarray]]:
         """Get performance metrics for the trained classifier.
 
         Parameters
