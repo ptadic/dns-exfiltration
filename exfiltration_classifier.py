@@ -108,7 +108,7 @@ class ExfiltrationClassifier(object):
                 hidden_layer_sizes=(20,30,10),
                 verbose=verbose
             )
-        elif classifier_type == 'xgb':
+        elif classifier_type == 'xgb gpu':
             self.clf = xgb.XGBClassifier(
                 n_estimators = 100,
                 objective='binary:logistic',
@@ -118,6 +118,20 @@ class ExfiltrationClassifier(object):
                 subsample=0.1,
                 scale_pos_weight=1,
                 predictor='gpu_predictor',
+                eval_metric='error',
+                early_stopping_rounds=10,
+                use_label_encoder=False
+            )
+        elif classifier_type == 'xgb cpu':
+            self.clf = xgb.XGBClassifier(
+                n_estimators = 100,
+                objective='binary:logistic',
+                tree_method='hist',
+                sampling_method='gradient_based',
+                verbosity=1 if verbose else 0,
+                subsample=0.1,
+                scale_pos_weight=1,
+                predictor='cpu_predictor',
                 eval_metric='error',
                 early_stopping_rounds=10,
                 use_label_encoder=False
